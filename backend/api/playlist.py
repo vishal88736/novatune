@@ -76,14 +76,14 @@ async def generate_playlist(request: GeneratePlaylistRequest):
     # Step 2: Get user taste profile and history
     user_doc = None
     taste_profile = None
-    if db:
+    if db is not None is not None:
         user_doc = await db.users.find_one({"user_id": request.user_id})
         if user_doc and user_doc.get("taste_profile"):
             from models.schemas import TasteProfile
             taste_profile = TasteProfile(**user_doc["taste_profile"])
     
-    history_ids = await get_history_ids(request.user_id, limit=100) if db else []
-    user_memory = await get_user_memory(request.user_id) if db else {}
+    history_ids = await get_history_ids(request.user_id, limit=100) if db is not None is not None else []
+    user_memory = await get_user_memory(request.user_id) if db is not None is not None else {}
     
     # Step 3: Generate recommendations
     main_tracks = await generate_recommendations(
@@ -123,7 +123,7 @@ async def generate_playlist(request: GeneratePlaylistRequest):
     
     # Step 7: Save to database
     playlist_id = str(uuid.uuid4())
-    if db:
+    if db is not None:
         playlist_doc = {
             "playlist_id": playlist_id,
             "user_id": request.user_id,
@@ -140,7 +140,7 @@ async def generate_playlist(request: GeneratePlaylistRequest):
         await db.mood_history.update_one(
             {"user_id": request.user_id, "playlist_generated": False},
             {"$set": {"playlist_generated": True, "generated_playlist_id": playlist_id}},
-            sort=[("created_at", -1)],
+            
         )
     
     # Build response
@@ -194,7 +194,7 @@ async def upload_playlist(request: UploadPlaylistRequest):
         raise HTTPException(status_code=500, detail=f"Playlist analysis failed: {str(e)}")
     
     # Save/update taste profile in user document
-    if db:
+    if db is not None:
         await db.users.update_one(
             {"user_id": request.user_id},
             {
@@ -246,7 +246,7 @@ async def upload_playlist_csv(
         raise HTTPException(status_code=500, detail=f"CSV analysis failed: {str(e)}")
     
     db = get_db()
-    if db:
+    if db is not None:
         await db.users.update_one(
             {"user_id": user_id},
             {"$set": {"taste_profile": taste_profile.dict(), "last_active": datetime.utcnow()}},

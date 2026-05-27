@@ -56,7 +56,7 @@ async def explain_song(request: ExplainRequest):
     taste_profile = None
     user_memory = {}
     
-    if db:
+    if db is not None:
         user = await db.users.find_one({"user_id": request.user_id}, {"_id": 0})
         if user and user.get("taste_profile"):
             taste_profile = TasteProfile(**user["taste_profile"])

@@ -50,7 +50,7 @@ async def analyze_mood_endpoint(request: MoodRequest):
     
     # Persist to mood history
     db = get_db()
-    if db is not None:
+    if db is not None is not None:
         await db.mood_history.insert_one({
             "entry_id": str(uuid.uuid4()),
             "user_id": request.user_id,
