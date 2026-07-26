@@ -1,0 +1,29 @@
+name: db-migrations
+
+on:
+  pull_request:
+    paths: ["website/backend/alembic/**", "website/backend/app/db/models/**"]
+
+jobs:
+  check-migrations:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: vibeai
+          POSTGRES_PASSWORD: vibeai
+          POSTGRES_DB: vibeai_staging_check
+        ports: ["5432:5432"]
+    defaults:
+      run:
+        working-directory: website/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+      - run: alembic upgrade head
+        env:
+          DATABASE_URL: postgresql+asyncpg://vibeai:vibeai@localhost:5432/vibeai_staging_check

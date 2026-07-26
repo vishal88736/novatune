@@ -1,0 +1,27 @@
+name: frontend-ci
+
+on:
+  pull_request:
+    paths: ["website/frontend/**"]
+  push:
+    branches: [main, develop]
+    paths: ["website/frontend/**"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: website/frontend/package.json
+      - run: npm install
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build

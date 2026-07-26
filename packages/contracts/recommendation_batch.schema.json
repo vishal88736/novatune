@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecommendationBatch",
+  "description": "Contract shared by ai-engine's recommendation_agent output, website/backend's response model, and website/frontend's RecommendationBatch type.",
+  "type": "object",
+  "required": ["tracks", "arc_label", "generated_for_mood"],
+  "properties": {
+    "tracks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "youtube_video_id", "title", "artist", "duration_seconds", "thumbnail_url"],
+        "properties": {
+          "id": { "type": "string" },
+          "youtube_video_id": { "type": "string" },
+          "title": { "type": "string" },
+          "artist": { "type": "string" },
+          "duration_seconds": { "type": "integer" },
+          "thumbnail_url": { "type": "string" },
+          "reason_summary": { "type": "string" }
+        }
+      }
+    },
+    "arc_label": { "type": "string" },
+    "generated_for_mood": { "type": "string" }
+  }
+}

@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/*
+  VibeAI design tokens
+  -----------------------------------------------------------------------
+  Palette: deep-space void base, with a three-way aurora accent
+  (violet / cyan / magenta) used ONLY on the signature aurora field and
+  sparing highlight accents — never as flat fills on large surfaces.
+
+  Type: "Space Grotesk" (display — geometric, slightly technical, used for
+  headlines and the wordmark) paired with "Inter" (body/UI) and "JetBrains
+  Mono" (data / timestamps / agent trace labels).
+*/
+
+@theme {
+  --color-void-950: #06070a;
+  --color-void-900: #0a0b0f;
+  --color-void-800: #101219;
+  --color-void-700: #171a24;
+  --color-void-600: #232636;
+
+  --color-mist-100: #f5f4f8;
+  --color-mist-300: #c8c7d6;
+  --color-mist-500: #8b899e;
+
+  --color-aurora-violet: #7c5cfc;
+  --color-aurora-cyan: #38e1c6;
+  --color-aurora-magenta: #ff5fae;
+  --color-aurora-amber: #ffb648;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-glass: 1.25rem;
+}
+
+html,
+body {
+  background: var(--color-void-950);
+  color: var(--color-mist-100);
+  font-family: var(--font-body);
+  min-height: 100dvh;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-aurora-violet) 45%, transparent);
+  color: white;
+}
+
+/* Glassmorphism surface — the single canonical utility, applied consistently */
+.glass {
+  background: color-mix(in oklab, white 4%, transparent);
+  border: 1px solid color-mix(in oklab, white 10%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-radius: var(--radius-glass);
+}
+
+.glass-strong {
+  background: color-mix(in oklab, white 7%, transparent);
+  border: 1px solid color-mix(in oklab, white 14%, transparent);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border-radius: var(--radius-glass);
+}
+
+/* Aurora mesh — animated gradient field, GPU-cheap (background-position only) */
+@keyframes aurora-drift {
+  0% { background-position: 0% 50%, 100% 20%, 40% 80%; }
+  50% { background-position: 100% 50%, 0% 80%, 70% 20%; }
+  100% { background-position: 0% 50%, 100% 20%, 40% 80%; }
+}
+
+.aurora-field {
+  background-image:
+    radial-gradient(45% 45% at var(--x1, 20%) var(--y1, 30%), color-mix(in oklab, var(--color-aurora-violet) 55%, transparent), transparent 70%),
+    radial-gradient(40% 40% at var(--x2, 80%) var(--y2, 20%), color-mix(in oklab, var(--color-aurora-cyan) 45%, transparent), transparent 70%),
+    radial-gradient(50% 50% at var(--x3, 50%) var(--y3, 80%), color-mix(in oklab, var(--color-aurora-magenta) 40%, transparent), transparent 70%);
+  background-size: 200% 200%, 200% 200%, 200% 200%;
+  animation: aurora-drift 22s ease-in-out infinite;
+  filter: blur(60px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-field {
+    animation: none;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.text-gradient-aurora {
+  background: linear-gradient(90deg, var(--color-aurora-violet), var(--color-aurora-cyan) 55%, var(--color-aurora-magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Focus visibility (accessibility floor) */
+:focus-visible {
+  outline: 2px solid var(--color-aurora-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

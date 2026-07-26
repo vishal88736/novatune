@@ -1,0 +1,40 @@
+name: vibeai-prod
+
+# Production overrides used only where Railway's Docker-based deploys apply
+# (backend, ai-engine, celery-worker, celery-beat). Postgres/Redis/Qdrant are
+# managed services (Neon, Railway Redis, Qdrant Cloud) in production, and
+# the frontend deploys natively to Vercel rather than via this compose file.
+
+services:
+  ai-engine:
+    build:
+      context: ../../ai-engine
+      dockerfile: Dockerfile
+    restart: always
+    env_file: ../../ai-engine/.env
+    ports: ["8100:8100"]
+
+  backend:
+    build:
+      context: ../../website/backend
+      dockerfile: Dockerfile
+    restart: always
+    env_file: ../../website/backend/.env
+    ports: ["8000:8000"]
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+
+  celery-worker:
+    build:
+      context: ../../website/backend
+      dockerfile: Dockerfile
+    restart: always
+    command: celery -A app.workers.celery_app worker --loglevel=info --concurrency=4
+    env_file: ../../website/backend/.env
+
+  celery-beat:
+    build:
+      context: ../../website/backend
+      dockerfile: Dockerfile
+    restart: always
+    command: celery -A app.workers.celery_app beat --loglevel=info
+    env_file: ../../website/backend/.env

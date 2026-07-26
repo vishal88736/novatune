@@ -1,0 +1,2 @@
+-- Alembic dir kept intentionally empty of a first revision; run:
+-- alembic revision --autogenerate -m "initial schema"

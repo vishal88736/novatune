@@ -1,0 +1,7 @@
+[
+  { "text": "I just got the job offer I've been waiting months for!", "expected_label": "joy" },
+  { "text": "I can't stop thinking about how much I miss them.", "expected_label": "sadness" },
+  { "text": "Why would they even say that to me, that's so unfair.", "expected_label": "anger" },
+  { "text": "I'm a little nervous about the interview tomorrow.", "expected_label": "nervousness" },
+  { "text": "Just a normal, quiet evening at home.", "expected_label": "neutral" }
+]
