@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {
-  Brain, Radio, Sparkles, Fingerprint, Compass, LineChart, Mail, Play, Zap,
+  Brain, Radio, Sparkles, Fingerprint, Compass, LineChart, Mail, Play, Zap, Disc3,
 } from "lucide-react";
 import { AuroraBackground } from "@/components/shared/aurora-background";
 import { VibeDisc, DiscChip } from "@/components/magic/vibe-disc";
@@ -33,7 +33,7 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-lift)]">
           <AuroraBackground className="opacity-70" />
 
-          <div className="relative grid grid-cols-1 items-center gap-12 px-8 py-16 sm:px-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+          <div className="relative grid grid-cols-1 items-center gap-12 px-8 py-16 sm:px-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
             {/* Left column */}
             <div className="relative">
               <Doodle
@@ -75,8 +75,8 @@ export default function HomePage() {
                 </Button>
               </form>
 
-              <div className="mt-6 flex items-center gap-3">
-                <Link href="/sign-up">
+              <div className="mt-6">
+                <Link href="/sign-in">
                   <Button variant="ghost" size="sm" className="px-2">
                     Already using VibeAI? Sign in
                   </Button>
@@ -85,14 +85,9 @@ export default function HomePage() {
 
               {/* Lower-left feature block, as in the reference */}
               <div className="relative mt-14 flex items-center gap-5">
-                <Doodle
-                  variant="hook"
-                  end="arrow"
-                  className="pointer-events-none absolute -top-24 left-0 hidden h-32 w-64 text-[var(--color-grape)] lg:block"
-                />
                 <div className="grid h-24 w-24 shrink-0 place-items-center rounded-full bg-[var(--color-grape-wash)] shadow-[var(--shadow-soft)]">
-                  <div className="grid h-14 w-14 place-items-center rounded-full bg-[var(--color-grape)] text-white">
-                    <Play size={22} fill="currentColor" className="ml-0.5" />
+                  <div className="grid h-16 w-16 place-items-center rounded-full bg-[var(--color-grape)] text-white">
+                    <Disc3 size={28} strokeWidth={1.75} />
                   </div>
                 </div>
                 <div>
@@ -104,28 +99,33 @@ export default function HomePage() {
                   </p>
                   <p className="mt-1 text-sm text-[var(--color-ink-muted)]">Top-rated albums</p>
                 </div>
-                <Button size="icon" className="ml-auto hidden h-14 w-14 rounded-2xl lg:inline-flex">
+                <Button size="icon" className="hidden h-14 w-14 rounded-2xl lg:inline-flex">
                   <Play size={20} fill="currentColor" className="ml-0.5" />
                 </Button>
+                <Doodle
+                  variant="hook"
+                  end="arrow"
+                  className="pointer-events-none absolute -top-16 left-6 hidden h-20 w-48 text-[var(--color-grape)] lg:block"
+                />
               </div>
             </div>
 
             {/* Right column — the gradient disc */}
-            <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative mx-auto w-full max-w-[440px] lg:mx-0">
               <VibeDisc className="w-full">
-                <DiscChip className="left-[6%] top-[16%] h-16 w-16">
+                <DiscChip className="left-[1%] top-[14%] h-16 w-16">
                   <Sparkles size={24} />
                 </DiscChip>
-                <DiscChip className="right-[4%] top-[38%] h-14 w-14">
+                <DiscChip className="right-[1%] top-[36%] h-14 w-14">
                   <Radio size={22} />
                 </DiscChip>
               </VibeDisc>
 
               {/* Lightning accents over the disc */}
-              <Zap className="absolute left-[22%] top-[4%] h-12 w-12 rotate-[18deg] fill-[var(--color-sun)] text-[var(--color-sun-deep)]" />
-              <Zap className="absolute bottom-[22%] right-[6%] h-9 w-9 rotate-[12deg] fill-[var(--color-sun)] text-[var(--color-sun-deep)]" />
+              <Zap className="absolute left-[18%] top-[-3%] h-14 w-14 rotate-[18deg] fill-[var(--color-sun)] text-[var(--color-sun-deep)]" />
+              <Zap className="absolute bottom-[16%] right-[0%] h-11 w-11 rotate-[12deg] fill-[var(--color-sun)] text-[var(--color-sun-deep)]" />
 
-              <PlayerPreview className="absolute -bottom-10 left-0 right-0 z-10 sm:-bottom-12 lg:-left-6 lg:right-auto lg:w-[22rem]" />
+              <PlayerPreview className="absolute -bottom-12 left-0 z-10 w-[calc(100%-1.5rem)] max-w-[24rem] lg:-bottom-14 lg:left-[-4rem]" />
             </div>
           </div>
         </div>

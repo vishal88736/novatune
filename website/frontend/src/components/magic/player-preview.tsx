@@ -20,36 +20,31 @@ export function PlayerPreview({
   className?: string;
 }) {
   return (
-    <div className={cn("surface-strong flex items-center gap-4 p-5", className)}>
-      <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)]">
-        <Disc3 size={26} strokeWidth={1.75} />
+    <div className={cn("surface-strong flex items-center gap-3.5 p-4", className)}>
+      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)]">
+        <Disc3 size={22} strokeWidth={1.75} />
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="truncate font-[var(--font-display)] text-base font-semibold text-[var(--color-ink)]">
+        <p className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
           {title}
         </p>
-        <p className="truncate text-sm text-[var(--color-ink-muted)]">{artist}</p>
+        <p className="truncate text-xs text-[var(--color-ink-muted)]">{artist}</p>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="hidden items-center gap-3 sm:flex">
-          <span className="font-[var(--font-mono)] text-xs text-[var(--color-ink-muted)]">{elapsed}</span>
-          <div className="h-1.5 w-24 overflow-hidden rounded-full bg-[var(--color-canvas-deep)]">
-            <div
-              className="h-full rounded-full bg-[var(--color-grape)]"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-        <button
-          type="button"
-          aria-label="Pause"
-          className="grid h-11 w-11 place-items-center rounded-full bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)] transition-transform hover:scale-105"
-        >
-          <Pause size={18} fill="currentColor" />
-        </button>
+      <span className="hidden shrink-0 font-[var(--font-mono)] text-[11px] text-[var(--color-ink-muted)] sm:inline">
+        {elapsed}
+      </span>
+      <div className="hidden h-1.5 w-16 shrink-0 overflow-hidden rounded-full bg-[var(--color-canvas-deep)] sm:block">
+        <div className="h-full rounded-full bg-[var(--color-grape)]" style={{ width: `${progress}%` }} />
       </div>
+      <button
+        type="button"
+        aria-label="Pause"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)] transition-transform hover:scale-105"
+      >
+        <Pause size={16} fill="currentColor" />
+      </button>
     </div>
   );
 }

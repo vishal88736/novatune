@@ -72,98 +72,100 @@ body {
   color: var(--color-ink);
 }
 
-/* Surfaces — the canonical card treatment, applied consistently */
-.surface {
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-soft);
-}
+@layer components {
+  /* Surfaces — the canonical card treatment, applied consistently */
+  .surface {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+  }
 
-.surface-strong {
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-lift);
-}
+  .surface-strong {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-lift);
+  }
 
-.surface-flat {
-  background: var(--color-canvas-soft);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-card);
-}
+  .surface-flat {
+    background: var(--color-canvas-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
 
-/* The signature gradient disc — purple through pink into warm orange */
-.disc {
-  background: conic-gradient(
-    from 210deg,
-    var(--color-grape) 0deg,
-    #a24ee8 90deg,
-    var(--color-coral) 165deg,
-    #f7a85c 225deg,
-    var(--color-coral) 285deg,
-    var(--color-grape) 360deg
-  );
-}
+  /* The signature gradient disc — purple through pink into warm orange */
+  .disc {
+    background: conic-gradient(
+      from 210deg,
+      var(--color-grape) 0deg,
+      #a24ee8 90deg,
+      var(--color-coral) 165deg,
+      #f7a85c 225deg,
+      var(--color-coral) 285deg,
+      var(--color-grape) 360deg
+    );
+  }
 
-/* Hand-drawn doodles: the dashed S-curves that decorate the layout */
-.doodle {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.75;
-  stroke-linecap: round;
-  stroke-dasharray: 5 7;
-}
+  /* Hand-drawn doodles: the dashed S-curves that decorate the layout */
+  .doodle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-dasharray: 5 7;
+  }
 
-.doodle-solid {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.75;
-  stroke-linecap: round;
-}
+  .doodle-solid {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+  }
 
-/* The loose ring drawn around a highlighted word */
-.doodle-ring {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.75;
-  stroke-dasharray: 6 8;
-  stroke-linecap: round;
-}
+  /* The loose ring drawn around a highlighted word */
+  .doodle-ring {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-dasharray: 6 8;
+    stroke-linecap: round;
+  }
 
-/* Eyebrow labels — uppercase, widely tracked, grape */
-.eyebrow {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--color-grape);
-}
+  /* Eyebrow labels — uppercase, widely tracked, grape */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-grape);
+  }
 
-/* Yellow squircle chip that holds an icon */
-.chip {
-  display: grid;
-  place-items: center;
-  border-radius: 1.15rem;
-  background: var(--color-sun);
-  color: #ffffff;
-  box-shadow: 0 10px 22px -12px rgb(223 167 36 / 0.9);
-}
+  /* Yellow squircle chip that holds an icon */
+  .chip {
+    display: grid;
+    place-items: center;
+    border-radius: 1.15rem;
+    background: var(--color-sun);
+    color: #ffffff;
+    box-shadow: 0 10px 22px -12px rgb(223 167 36 / 0.9);
+  }
 
-.text-gradient-brand {
-  background: linear-gradient(96deg, var(--color-grape), var(--color-coral));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+  .text-gradient-brand {
+    background: linear-gradient(96deg, var(--color-grape), var(--color-coral));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 
-/* Soft blurred colour wash behind the canvas — the reference's ambient glow */
-.canvas-wash {
-  background-image:
-    radial-gradient(38% 42% at 12% 8%, color-mix(in oklab, var(--color-grape-soft) 38%, transparent), transparent 70%),
-    radial-gradient(34% 38% at 92% 18%, color-mix(in oklab, var(--color-sun-soft) 42%, transparent), transparent 70%),
-    radial-gradient(40% 44% at 78% 92%, color-mix(in oklab, var(--color-coral-soft) 34%, transparent), transparent 70%);
+  /* Soft blurred colour wash behind the canvas — the reference's ambient glow */
+  .canvas-wash {
+    background-image:
+      radial-gradient(38% 42% at 12% 8%, color-mix(in oklab, var(--color-grape-soft) 38%, transparent), transparent 70%),
+      radial-gradient(34% 38% at 92% 18%, color-mix(in oklab, var(--color-sun-soft) 42%, transparent), transparent 70%),
+      radial-gradient(40% 44% at 78% 92%, color-mix(in oklab, var(--color-coral-soft) 34%, transparent), transparent 70%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
