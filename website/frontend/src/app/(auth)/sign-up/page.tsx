@@ -4,16 +4,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { SurfaceCard } from "@/components/shared/surface-card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { signUpSchema, type SignUpInput } from "@/schemas/auth";
 import { authClient } from "@/lib/auth-client";
+import { useCallbackUrl } from "@/hooks/use-callback-url";
 
-export default function SignUpPage() {
+function SignUpForm() {
   const router = useRouter();
+  const callbackUrl = useCallbackUrl();
   const [error, setError] = useState<string | null>(null);
   const {
     register,
@@ -32,7 +34,8 @@ export default function SignUpPage() {
       setError(authError.message ?? "Couldn't create your account. Try again.");
       return;
     }
-    router.push("/dashboard");
+    router.push(callbackUrl);
+    router.refresh();
   };
 
   return (
@@ -70,8 +73,19 @@ export default function SignUpPage() {
         </Button>
       </form>
       <p className="mt-6 text-center text-sm text-[var(--color-ink-muted)]">
-        Already have an account? <Link href="/sign-in" className="text-[var(--color-grape)]">Sign in</Link>
+        Already have an account?{" "}
+        <Link href="/sign-in" className="text-[var(--color-grape)]">
+          Sign in
+        </Link>
       </p>
     </SurfaceCard>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense>
+      <SignUpForm />
+    </Suspense>
   );
 }

@@ -4,16 +4,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Suspense, useState } from "react";
 import { SurfaceCard } from "@/components/shared/surface-card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { signInSchema, type SignInInput } from "@/schemas/auth";
 import { authClient } from "@/lib/auth-client";
-import { useState } from "react";
+import { useCallbackUrl } from "@/hooks/use-callback-url";
 
-export default function SignInPage() {
+function SignInForm() {
   const router = useRouter();
+  const callbackUrl = useCallbackUrl();
   const [error, setError] = useState<string | null>(null);
   const {
     register,
@@ -28,7 +30,8 @@ export default function SignInPage() {
       setError(authError.message ?? "Couldn't sign you in. Check your details and try again.");
       return;
     }
-    router.push("/dashboard");
+    router.push(callbackUrl);
+    router.refresh();
   };
 
   return (
@@ -54,8 +57,19 @@ export default function SignInPage() {
         </Button>
       </form>
       <p className="mt-6 text-center text-sm text-[var(--color-ink-muted)]">
-        New here? <Link href="/sign-up" className="text-[var(--color-grape)]">Create an account</Link>
+        New here?{" "}
+        <Link href="/sign-up" className="text-[var(--color-grape)]">
+          Create an account
+        </Link>
       </p>
     </SurfaceCard>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense>
+      <SignInForm />
+    </Suspense>
   );
 }

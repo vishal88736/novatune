@@ -1,6 +1,15 @@
 import type { BetterAuthOptions } from "better-auth";
 
 /**
+ * Cookie prefix Better Auth uses. Kept as a constant so the route guard
+ * (src/middleware.ts) can look for the session cookie without pulling
+ * Better Auth's runtime into the Edge bundle.
+ */
+export const AUTH_COOKIE_PREFIX = "better-auth";
+
+export const SESSION_COOKIE_NAME = `${AUTH_COOKIE_PREFIX}.session_token`;
+
+/**
  * Better Auth configuration, kept separate from the database wiring so it
  * can be shared with the schema generator (scripts/generate-auth-schema.mts)
  * without pulling in `pg`.
@@ -23,6 +32,7 @@ export const authOptions = {
     cookieCache: { enabled: true, maxAge: 5 * 60 },
   },
   advanced: {
+    cookiePrefix: AUTH_COOKIE_PREFIX,
     /**
      * The domain tables key on UUIDs (see website/backend/app/db/models/user.py),
      * and website/backend parses the session's user id straight into a UUID.
