@@ -1,6 +1,6 @@
-import uuid
+from datetime import datetime
 
-from sqlalchemy import String
+from sqlalchemy import DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -18,4 +18,6 @@ class User(Base, UUIDPrimaryKeyMixin, TimestampMixin):
 
     display_name: Mapped[str] = mapped_column(String(120))
     avatar_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
-    onboarding_completed_at: Mapped[uuid.UUID | None] = mapped_column(nullable=True)
+    onboarding_completed_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
