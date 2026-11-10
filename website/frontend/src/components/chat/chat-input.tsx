@@ -17,17 +17,17 @@ export function ChatInput({ onSubmit }: { onSubmit: (text: string) => void }) {
   });
 
   return (
-    <form onSubmit={submit} className="flex items-center gap-2 glass-strong p-2">
+    <form onSubmit={submit} className="flex items-center gap-2 surface-strong p-2">
       <VoiceOrbButton onTranscript={(t) => t && onSubmit(t)} />
       <input
         {...register("message")}
         placeholder="Tell VibeAI how you're feeling…"
-        className="flex-1 bg-transparent px-2 text-sm text-[var(--color-mist-100)] placeholder:text-[var(--color-mist-500)] outline-none"
+        className="flex-1 bg-transparent px-2 text-sm text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)] outline-none"
       />
       <button
         type="submit"
         aria-label="Send"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-aurora-violet)] to-[var(--color-aurora-cyan)] text-white"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)] transition-transform hover:scale-105"
       >
         <Send size={16} />
       </button>

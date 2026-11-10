@@ -14,8 +14,8 @@ export default function DiscoverPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="font-[var(--font-display)] text-3xl font-medium">Discover</h1>
-        <p className="mt-1 text-sm text-[var(--color-mist-500)]">
+        <h1 className="font-[var(--font-display)] text-3xl font-bold">Discover</h1>
+        <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
           The Discovery Agent deliberately surfaces artists the popularity algorithm buries.
         </p>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { GlassCard } from "@/components/shared/glass-card";
+import { SurfaceCard } from "@/components/shared/surface-card";
 import { MoodTimeline } from "@/components/analytics/mood-timeline";
 
 const SAMPLE_TIMELINE = [
@@ -17,25 +17,25 @@ export default function JourneyPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="font-[var(--font-display)] text-3xl font-medium">Emotional Journey</h1>
-        <p className="mt-1 text-sm text-[var(--color-mist-500)]">
+        <h1 className="font-[var(--font-display)] text-3xl font-bold">Emotional Journey</h1>
+        <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
           The Memory Agent's long-term view of how you've been feeling.
         </p>
       </div>
 
-      <GlassCard strong>
+      <SurfaceCard strong>
         <MoodTimeline data={SAMPLE_TIMELINE} />
-      </GlassCard>
+      </SurfaceCard>
 
       <div className="flex flex-col gap-3">
         {MILESTONES.map((m) => (
-          <GlassCard key={m.label} className="flex gap-4">
-            <span className="font-[var(--font-mono)] text-xs text-[var(--color-aurora-cyan)]">{m.date}</span>
+          <SurfaceCard key={m.label} className="flex gap-4">
+            <span className="font-[var(--font-mono)] text-xs text-[var(--color-grape)]">{m.date}</span>
             <div>
               <p className="text-sm font-medium">{m.label}</p>
-              <p className="text-xs text-[var(--color-mist-500)]">{m.detail}</p>
+              <p className="text-xs text-[var(--color-ink-muted)]">{m.detail}</p>
             </div>
-          </GlassCard>
+          </SurfaceCard>
         ))}
       </div>
     </div>

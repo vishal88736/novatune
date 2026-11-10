@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const MOODS = [
-  { label: "Euphoric", angle: -60, color: "var(--color-aurora-amber)" },
-  { label: "Content", angle: -20, color: "var(--color-aurora-cyan)" },
-  { label: "Calm", angle: 20, color: "var(--color-aurora-cyan)" },
-  { label: "Melancholic", angle: 60, color: "var(--color-aurora-violet)" },
-  { label: "Anxious", angle: 100, color: "var(--color-aurora-magenta)" },
-  { label: "Angry", angle: 140, color: "var(--color-aurora-magenta)" },
-  { label: "Nostalgic", angle: 180, color: "var(--color-aurora-violet)" },
-  { label: "Motivated", angle: -100, color: "var(--color-aurora-amber)" },
+  { label: "Euphoric", angle: -60, color: "var(--color-sun)" },
+  { label: "Content", angle: -20, color: "var(--color-grape)" },
+  { label: "Calm", angle: 20, color: "var(--color-grape)" },
+  { label: "Melancholic", angle: 60, color: "var(--color-grape)" },
+  { label: "Anxious", angle: 100, color: "var(--color-coral)" },
+  { label: "Angry", angle: 140, color: "var(--color-coral)" },
+  { label: "Nostalgic", angle: 180, color: "var(--color-grape)" },
+  { label: "Motivated", angle: -100, color: "var(--color-sun)" },
 ];
 
 /**
@@ -22,7 +22,7 @@ const MOODS = [
 export function MoodWheel({ onSelect }: { onSelect: (label: string) => void }) {
   return (
     <div className="relative mx-auto h-72 w-72">
-      <div className="absolute inset-0 rounded-full glass" />
+      <div className="absolute inset-0 rounded-full surface" />
       {MOODS.map((mood) => (
         <motion.button
           key={mood.label}
@@ -34,13 +34,13 @@ export function MoodWheel({ onSelect }: { onSelect: (label: string) => void }) {
           )}
           style={{
             transform: `rotate(${mood.angle}deg) translate(110px) rotate(${-mood.angle}deg) translate(-50%, -50%)`,
-            background: `color-mix(in oklab, ${mood.color} 70%, var(--color-void-800))`,
+            background: `color-mix(in oklab, ${mood.color} 70%, var(--color-canvas-soft))`,
           }}
         >
           {mood.label}
         </motion.button>
       ))}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-[var(--color-mist-500)]">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-[var(--color-ink-muted)]">
         How's your vibe?
       </div>
     </div>

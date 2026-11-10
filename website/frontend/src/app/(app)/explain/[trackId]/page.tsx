@@ -7,7 +7,7 @@ export default async function ExplainPage({ params }: { params: Promise<{ trackI
   // Explainability Agent. Static narrative shown here as a structural example.
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="mb-6 font-[var(--font-display)] text-2xl font-medium">Explanation</h1>
+      <h1 className="mb-6 font-[var(--font-display)] text-2xl font-bold">Explanation</h1>
       <ExplanationPanel
         trackTitle="Golden Hour"
         narrative="You mentioned feeling calm but hopeful after a long week. This track matches your target valence closely, sits in a tempo range you've responded well to on wind-down evenings, and features an artist your taste profile weights highly."
@@ -18,7 +18,7 @@ export default async function ExplainPage({ params }: { params: Promise<{ trackI
           { label: "Arc position fit", weight: 0.62 },
         ]}
       />
-      <p className="mt-3 text-xs text-[var(--color-mist-500)]">Track ID: {trackId}</p>
+      <p className="mt-3 text-xs text-[var(--color-ink-muted)]">Track ID: {trackId}</p>
     </div>
   );
 }

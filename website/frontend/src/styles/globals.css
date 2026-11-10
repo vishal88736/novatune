@@ -3,105 +3,179 @@
 /*
   VibeAI design tokens
   -----------------------------------------------------------------------
-  Palette: deep-space void base, with a three-way aurora accent
-  (violet / cyan / magenta) used ONLY on the signature aurora field and
-  sparing highlight accents — never as flat fills on large surfaces.
+  Palette: a warm cream canvas with a violet "grape" primary and a
+  sunflower "sun" accent, plus a coral mid-tone used in gradients.
+  Surfaces are white cards with soft, low-contrast shadows rather than
+  translucent glass — the product should feel like printed paper and
+  ink, not neon.
 
-  Type: "Space Grotesk" (display — geometric, slightly technical, used for
-  headlines and the wordmark) paired with "Inter" (body/UI) and "JetBrains
-  Mono" (data / timestamps / agent trace labels).
+  Type: "Poppins" (display + body — a geometric sans that carries the
+  headline weight) paired with "JetBrains Mono" for data, timestamps
+  and agent-trace labels.
 */
 
 @theme {
-  --color-void-950: #06070a;
-  --color-void-900: #0a0b0f;
-  --color-void-800: #101219;
-  --color-void-700: #171a24;
-  --color-void-600: #232636;
+  /* Canvas + surfaces */
+  --color-canvas: #fdf9f4;
+  --color-canvas-soft: #f6effc;
+  --color-canvas-deep: #efe6f8;
+  --color-surface: #ffffff;
 
-  --color-mist-100: #f5f4f8;
-  --color-mist-300: #c8c7d6;
-  --color-mist-500: #8b899e;
+  /* Ink (type) */
+  --color-ink: #241c3b;
+  --color-ink-soft: #4b4269;
+  --color-ink-muted: #7d7499;
+  --color-ink-faint: #aaa2c0;
 
-  --color-aurora-violet: #7c5cfc;
-  --color-aurora-cyan: #38e1c6;
-  --color-aurora-magenta: #ff5fae;
-  --color-aurora-amber: #ffb648;
+  /* Grape (primary) */
+  --color-grape: #8b3dd8;
+  --color-grape-deep: #6d26b2;
+  --color-grape-soft: #c79cf7;
+  --color-grape-wash: #f4e9fe;
 
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Sun (accent) */
+  --color-sun: #f7c744;
+  --color-sun-deep: #dfa724;
+  --color-sun-soft: #ffe7a3;
+  --color-sun-wash: #fff6de;
 
-  --radius-glass: 1.25rem;
+  /* Coral (gradient mid-tone) */
+  --color-coral: #f2799f;
+  --color-coral-soft: #ffc2d4;
+
+  /* Hairlines */
+  --color-line: #ece4f5;
+  --color-line-strong: #ddd0ee;
+
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --radius-card: 1.5rem;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 18px 40px -24px rgb(88 46 140 / 0.35);
+  --shadow-lift: 0 26px 60px -26px rgb(88 46 140 / 0.45);
+  --shadow-grape: 0 12px 28px -12px rgb(139 61 216 / 0.55);
 }
 
 html,
 body {
-  background: var(--color-void-950);
-  color: var(--color-mist-100);
+  background: var(--color-canvas);
+  color: var(--color-ink);
   font-family: var(--font-body);
   min-height: 100dvh;
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--color-aurora-violet) 45%, transparent);
-  color: white;
+  background: color-mix(in oklab, var(--color-grape) 22%, transparent);
+  color: var(--color-ink);
 }
 
-/* Glassmorphism surface — the single canonical utility, applied consistently */
-.glass {
-  background: color-mix(in oklab, white 4%, transparent);
-  border: 1px solid color-mix(in oklab, white 10%, transparent);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border-radius: var(--radius-glass);
+/* Surfaces — the canonical card treatment, applied consistently */
+.surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
 }
 
-.glass-strong {
-  background: color-mix(in oklab, white 7%, transparent);
-  border: 1px solid color-mix(in oklab, white 14%, transparent);
-  backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  border-radius: var(--radius-glass);
+.surface-strong {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lift);
 }
 
-/* Aurora mesh — animated gradient field, GPU-cheap (background-position only) */
-@keyframes aurora-drift {
-  0% { background-position: 0% 50%, 100% 20%, 40% 80%; }
-  50% { background-position: 100% 50%, 0% 80%, 70% 20%; }
-  100% { background-position: 0% 50%, 100% 20%, 40% 80%; }
+.surface-flat {
+  background: var(--color-canvas-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
 }
 
-.aurora-field {
+/* The signature gradient disc — purple through pink into warm orange */
+.disc {
+  background: conic-gradient(
+    from 210deg,
+    var(--color-grape) 0deg,
+    #a24ee8 90deg,
+    var(--color-coral) 165deg,
+    #f7a85c 225deg,
+    var(--color-coral) 285deg,
+    var(--color-grape) 360deg
+  );
+}
+
+/* Hand-drawn doodles: the dashed S-curves that decorate the layout */
+.doodle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-dasharray: 5 7;
+}
+
+.doodle-solid {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
+/* The loose ring drawn around a highlighted word */
+.doodle-ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-dasharray: 6 8;
+  stroke-linecap: round;
+}
+
+/* Eyebrow labels — uppercase, widely tracked, grape */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-grape);
+}
+
+/* Yellow squircle chip that holds an icon */
+.chip {
+  display: grid;
+  place-items: center;
+  border-radius: 1.15rem;
+  background: var(--color-sun);
+  color: #ffffff;
+  box-shadow: 0 10px 22px -12px rgb(223 167 36 / 0.9);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(96deg, var(--color-grape), var(--color-coral));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft blurred colour wash behind the canvas — the reference's ambient glow */
+.canvas-wash {
   background-image:
-    radial-gradient(45% 45% at var(--x1, 20%) var(--y1, 30%), color-mix(in oklab, var(--color-aurora-violet) 55%, transparent), transparent 70%),
-    radial-gradient(40% 40% at var(--x2, 80%) var(--y2, 20%), color-mix(in oklab, var(--color-aurora-cyan) 45%, transparent), transparent 70%),
-    radial-gradient(50% 50% at var(--x3, 50%) var(--y3, 80%), color-mix(in oklab, var(--color-aurora-magenta) 40%, transparent), transparent 70%);
-  background-size: 200% 200%, 200% 200%, 200% 200%;
-  animation: aurora-drift 22s ease-in-out infinite;
-  filter: blur(60px);
+    radial-gradient(38% 42% at 12% 8%, color-mix(in oklab, var(--color-grape-soft) 38%, transparent), transparent 70%),
+    radial-gradient(34% 38% at 92% 18%, color-mix(in oklab, var(--color-sun-soft) 42%, transparent), transparent 70%),
+    radial-gradient(40% 44% at 78% 92%, color-mix(in oklab, var(--color-coral-soft) 34%, transparent), transparent 70%);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-field {
-    animation: none;
-  }
   * {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
 }
 
-.text-gradient-aurora {
-  background: linear-gradient(90deg, var(--color-aurora-violet), var(--color-aurora-cyan) 55%, var(--color-aurora-magenta));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /* Focus visibility (accessibility floor) */
 :focus-visible {
-  outline: 2px solid var(--color-aurora-cyan);
+  outline: 2px solid var(--color-grape);
   outline-offset: 2px;
   border-radius: 4px;
 }

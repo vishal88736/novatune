@@ -7,7 +7,7 @@ export function ListeningHeatmap({ data }: { data: number[][] }) {
         <div
           key={i}
           className={cn("aspect-square rounded-sm")}
-          style={{ background: `color-mix(in oklab, var(--color-aurora-cyan) ${Math.round(v * 100)}%, var(--color-void-800))` }}
+          style={{ background: `color-mix(in oklab, var(--color-grape) ${Math.round(v * 100)}%, var(--color-canvas-soft))` }}
         />
       ))}
     </div>

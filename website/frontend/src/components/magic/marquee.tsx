@@ -20,7 +20,7 @@ export function Marquee({
         )}
       >
         {[...items, ...items].map((item, i) => (
-          <span key={i} className="text-sm text-[var(--color-mist-500)]">
+          <span key={i} className="text-sm text-[var(--color-ink-muted)]">
             {item}
           </span>
         ))}

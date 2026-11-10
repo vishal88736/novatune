@@ -18,8 +18,8 @@ const NAV = [
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-dvh bg-[var(--color-void-950)]">
-      <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col border-r border-white/5 p-5 md:flex">
+    <div className="flex min-h-dvh bg-[var(--color-canvas)]">
+      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r border-[var(--color-line)] bg-[var(--color-surface)] p-5 md:flex">
         <Link href="/dashboard" className="mb-8 px-2">
           <Logo />
         </Link>
@@ -28,7 +28,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <Link
               key={href}
               href={href}
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-[var(--color-mist-300)] transition-colors hover:bg-white/5 hover:text-white"
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--color-ink-soft)] transition-colors hover:bg-[var(--color-canvas-soft)] hover:text-[var(--color-ink)]"
             >
               <Icon size={17} />
               {label}

@@ -12,8 +12,8 @@ export function ChatBubble({ message }: { message: ChatMessage }) {
         className={cn(
           "max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed",
           isUser
-            ? "bg-gradient-to-br from-[var(--color-aurora-violet)] to-[var(--color-aurora-magenta)] text-white"
-            : "glass text-[var(--color-mist-100)]",
+            ? "bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)]"
+            : "surface text-[var(--color-ink)]",
         )}
       >
         {message.content || (message.isStreaming ? "…" : "")}

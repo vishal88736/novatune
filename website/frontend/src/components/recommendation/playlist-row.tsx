@@ -14,7 +14,7 @@ export function PlaylistRow({
 }) {
   return (
     <section className="flex flex-col gap-3">
-      <h3 className="font-[var(--font-display)] text-base font-medium text-[var(--color-mist-100)]">{title}</h3>
+      <h3 className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">{title}</h3>
       <div className="flex flex-col gap-2">
         {tracks.map((t, i) => (
           <TrackCard key={t.id} track={t} onPlay={() => onPlayTrack(i)} />

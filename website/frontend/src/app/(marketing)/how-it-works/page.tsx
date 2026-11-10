@@ -1,4 +1,4 @@
-import { GlassCard } from "@/components/shared/glass-card";
+import { SurfaceCard } from "@/components/shared/surface-card";
 
 const STEPS = [
   { title: "You share a vibe", body: "Type, talk, or tap the mood wheel. No forced categories — say it how you'd say it to a friend." },
@@ -11,21 +11,21 @@ const STEPS = [
 export default function HowItWorksPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-24">
-      <h1 className="mb-4 font-[var(--font-display)] text-4xl font-medium">How VibeAI thinks</h1>
-      <p className="mb-14 text-[var(--color-mist-400)]">
+      <h1 className="mb-4 font-[var(--font-display)] text-4xl font-bold">How VibeAI thinks</h1>
+      <p className="mb-14 text-[var(--color-ink-faint)]">
         Five steps happen behind every recommendation. None of them are a similarity score.
       </p>
       <ol className="flex flex-col gap-4">
         {STEPS.map((step, i) => (
-          <GlassCard key={step.title} className="flex gap-5">
-            <span className="font-[var(--font-mono)] text-sm text-[var(--color-aurora-cyan)]">
+          <SurfaceCard key={step.title} className="flex gap-5">
+            <span className="font-[var(--font-mono)] text-sm text-[var(--color-grape)]">
               {String(i + 1).padStart(2, "0")}
             </span>
             <div>
-              <h3 className="mb-1 font-[var(--font-display)] text-base font-medium">{step.title}</h3>
-              <p className="text-sm text-[var(--color-mist-500)]">{step.body}</p>
+              <h3 className="mb-1 font-[var(--font-display)] text-base font-bold">{step.title}</h3>
+              <p className="text-sm text-[var(--color-ink-muted)]">{step.body}</p>
             </div>
-          </GlassCard>
+          </SurfaceCard>
         ))}
       </ol>
     </main>

@@ -21,7 +21,7 @@ export function AgentThinkingIndicator({ agent }: { agent: string | null }) {
       className="flex items-center gap-3"
     >
       <VibeOrb size={28} energy={0.7} listening />
-      <span className="text-xs text-[var(--color-mist-500)]">
+      <span className="text-xs text-[var(--color-ink-muted)]">
         {AGENT_LABELS[agent] ?? "Working"}…
       </span>
     </motion.div>

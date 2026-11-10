@@ -19,9 +19,9 @@ export function VoiceOrbButton({ onTranscript }: { onTranscript: (text: string) 
     <button
       onClick={handleClick}
       aria-label="Voice input"
-      className="relative flex h-11 w-11 items-center justify-center rounded-full glass"
+      className="relative flex h-11 w-11 items-center justify-center rounded-full surface"
     >
-      {listening ? <VibeOrb size={28} listening energy={0.8} /> : <Mic size={18} className="text-[var(--color-mist-300)]" />}
+      {listening ? <VibeOrb size={28} listening energy={0.8} /> : <Mic size={18} className="text-[var(--color-ink-soft)]" />}
     </button>
   );
 }

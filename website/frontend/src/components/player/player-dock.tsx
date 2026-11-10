@@ -20,10 +20,10 @@ export function PlayerDock() {
   const progressPct = Math.min(100, (progressSeconds / Math.max(track.durationSeconds, 1)) * 100);
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[var(--color-void-900)]/80 backdrop-blur-2xl">
-      <div className="h-0.5 w-full bg-white/5">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-line)] bg-[var(--color-surface)]/90 backdrop-blur-2xl">
+      <div className="h-1 w-full bg-[var(--color-canvas-soft)]">
         <div
-          className="h-full bg-gradient-to-r from-[var(--color-aurora-violet)] to-[var(--color-aurora-cyan)] transition-[width] duration-300"
+          className="h-full bg-[var(--color-grape)] transition-[width] duration-300"
           style={{ width: `${progressPct}%` }}
         />
       </div>
@@ -34,33 +34,33 @@ export function PlayerDock() {
             alt={track.title}
             width={44}
             height={44}
-            className="rounded-lg object-cover"
+            className="rounded-xl object-cover"
           />
           <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-[var(--color-mist-100)]">{track.title}</p>
-            <p className="truncate text-xs text-[var(--color-mist-500)]">{track.artist}</p>
+            <p className="truncate text-sm font-semibold text-[var(--color-ink)]">{track.title}</p>
+            <p className="truncate text-xs text-[var(--color-ink-muted)]">{track.artist}</p>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
-          <button onClick={previous} aria-label="Previous track" className="text-[var(--color-mist-300)] hover:text-white">
+          <button onClick={previous} aria-label="Previous track" className="text-[var(--color-ink-soft)] hover:text-[var(--color-grape)]">
             <SkipBack size={18} />
           </button>
           <button
             onClick={toggle}
             aria-label={isPlaying ? "Pause" : "Play"}
             className={cn(
-              "flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-aurora-violet)] to-[var(--color-aurora-magenta)] text-white",
+              "flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)]",
             )}
           >
             {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
           </button>
-          <button onClick={next} aria-label="Next track" className="text-[var(--color-mist-300)] hover:text-white">
+          <button onClick={next} aria-label="Next track" className="text-[var(--color-ink-soft)] hover:text-[var(--color-grape)]">
             <SkipForward size={18} />
           </button>
         </div>
 
-        <div className="hidden items-center gap-2 text-xs text-[var(--color-mist-500)] sm:flex">
+        <div className="hidden items-center gap-2 text-xs text-[var(--color-ink-muted)] sm:flex">
           <span>{formatDuration(progressSeconds)}</span>
           <span>/</span>
           <span>{formatDuration(track.durationSeconds)}</span>

@@ -17,8 +17,8 @@ export default function DashboardPage() {
   return (
     <div className="flex flex-col gap-10">
       <div>
-        <h1 className="font-[var(--font-display)] text-3xl font-medium">Today's Vibe</h1>
-        <p className="mt-1 text-sm text-[var(--color-mist-500)]">
+        <h1 className="font-[var(--font-display)] text-3xl font-bold">Today's Vibe</h1>
+        <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
           Check in, and VibeAI will build the next hour around how you actually feel.
         </p>
       </div>

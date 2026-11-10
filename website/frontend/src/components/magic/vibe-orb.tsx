@@ -27,12 +27,12 @@ export function VibeOrb({
       style={{ width: size, height: size }}
     >
       <motion.div
-        className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--color-aurora-violet)] via-[var(--color-aurora-cyan)] to-[var(--color-aurora-magenta)]"
+        className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--color-grape)] via-[var(--color-grape-soft)] to-[var(--color-coral)]"
         animate={{ scale: listening ? [1, 1.15, 1] : [1, 1.05, 1] }}
         transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute inset-0 rounded-full blur-md bg-gradient-to-br from-[var(--color-aurora-violet)] via-[var(--color-aurora-cyan)] to-[var(--color-aurora-magenta)] opacity-70"
+        className="absolute inset-0 rounded-full blur-md bg-gradient-to-br from-[var(--color-grape)] via-[var(--color-grape-soft)] to-[var(--color-coral)] opacity-70"
         animate={{ scale: listening ? [1.1, 1.4, 1.1] : [1, 1.1, 1] }}
         transition={{ duration: duration * 1.2, repeat: Infinity, ease: "easeInOut" }}
       />

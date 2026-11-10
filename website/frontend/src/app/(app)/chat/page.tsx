@@ -36,14 +36,14 @@ export default function ChatPage() {
       <div className="mb-6 flex items-center gap-3">
         <VibeOrb size={32} energy={0.4} />
         <div>
-          <h1 className="font-[var(--font-display)] text-xl font-medium">Conversation</h1>
-          <p className="text-xs text-[var(--color-mist-500)]">Talk to VibeAI like you would a friend who gets music.</p>
+          <h1 className="font-[var(--font-display)] text-xl font-bold">Conversation</h1>
+          <p className="text-xs text-[var(--color-ink-muted)]">Talk to VibeAI like you would a friend who gets music.</p>
         </div>
       </div>
 
       <div className="flex-1 space-y-4 overflow-y-auto pr-2">
         {messages.length === 0 && (
-          <p className="mt-10 text-center text-sm text-[var(--color-mist-500)]">
+          <p className="mt-10 text-center text-sm text-[var(--color-ink-muted)]">
             Try: "I can't stop thinking about someone I used to love" or "I need energy for a workout."
           </p>
         )}

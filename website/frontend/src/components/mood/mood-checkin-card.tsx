@@ -1,6 +1,6 @@
 "use client";
 
-import { GlassCard } from "@/components/shared/glass-card";
+import { SurfaceCard } from "@/components/shared/surface-card";
 import { MoodWheel } from "./mood-wheel";
 import { useMoodDetection } from "@/hooks/use-mood-detection";
 import { EmotionBadge } from "./emotion-badge";
@@ -11,10 +11,10 @@ export function MoodCheckinCard() {
   const current = useMoodStore((s) => s.current);
 
   return (
-    <GlassCard strong className="flex flex-col items-center gap-6 py-8">
+    <SurfaceCard strong className="flex flex-col items-center gap-6 py-8">
       <MoodWheel onSelect={(label) => mutate({ moodTap: label })} />
-      {isPending && <p className="text-xs text-[var(--color-mist-500)]">Reading your vibe…</p>}
+      {isPending && <p className="text-xs text-[var(--color-ink-muted)]">Reading your vibe…</p>}
       {current && !isPending && <EmotionBadge mood={current} />}
-    </GlassCard>
+    </SurfaceCard>
   );
 }

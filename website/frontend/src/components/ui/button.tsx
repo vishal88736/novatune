@@ -3,18 +3,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none",
   {
     variants: {
       variant: {
         primary:
-          "bg-gradient-to-r from-[var(--color-aurora-violet)] to-[var(--color-aurora-magenta)] text-white shadow-[0_0_24px_-4px_var(--color-aurora-violet)] hover:brightness-110 active:brightness-95",
-        secondary: "glass text-[var(--color-mist-100)] hover:bg-white/10",
-        ghost: "text-[var(--color-mist-300)] hover:text-[var(--color-mist-100)] hover:bg-white/5",
-        outline: "border border-white/15 text-[var(--color-mist-100)] hover:border-white/30",
+          "bg-[var(--color-grape)] text-white shadow-[var(--shadow-grape)] hover:bg-[var(--color-grape-deep)] active:scale-[0.98]",
+        secondary:
+          "surface text-[var(--color-ink)] hover:border-[var(--color-line-strong)] hover:bg-[var(--color-canvas-soft)]",
+        ghost:
+          "text-[var(--color-ink-soft)] hover:text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]",
+        outline:
+          "border border-[var(--color-line-strong)] text-[var(--color-ink)] hover:bg-[var(--color-canvas-soft)]",
+        accent:
+          "bg-[var(--color-sun)] text-[var(--color-ink)] shadow-[0_12px_28px_-12px_rgb(223_167_36/0.9)] hover:bg-[var(--color-sun-deep)] active:scale-[0.98]",
       },
       size: {
-        sm: "h-9 px-4 text-xs",
+        sm: "h-9 px-5 text-xs",
         md: "h-11 px-6",
         lg: "h-14 px-8 text-base",
         icon: "h-10 w-10",
