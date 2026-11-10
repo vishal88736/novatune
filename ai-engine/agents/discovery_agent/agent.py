@@ -4,6 +4,8 @@ penalizing popularity_score so VibeAI doesn't converge on the same
 mainstream catalog every other recommender pushes.
 """
 
+from typing import Any
+
 from agents.base import AgentContext, AgentResult, BaseAgent
 
 POPULARITY_CEILING = 0.35  # tracks above this popularity_score are excluded from Discovery
@@ -13,7 +15,7 @@ class DiscoveryAgent(BaseAgent):
     name = "discovery_agent"
 
     async def run(self, ctx: AgentContext) -> AgentResult:
-        candidates: list[dict] = ctx.shared_state.get("candidate_tracks", [])
+        candidates: list[dict[str, Any]] = ctx.shared_state.get("candidate_tracks", [])
         hidden_gems = [c for c in candidates if c.get("popularity_score", 0) <= POPULARITY_CEILING] or [
             {
                 "id": "gem-1",

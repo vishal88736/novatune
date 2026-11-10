@@ -1,7 +1,7 @@
 """Pure arc-construction logic reused by the Sequencing Agent."""
 
 
-def build_arc(tracks: list[dict], arc: str) -> list[dict]:
+def build_arc(tracks: list[dict[str, Any]], arc: str) -> list[dict[str, Any]]:
     scored = [(t, (t.get("duration_seconds", 200) % 60) / 60) for t in tracks]
     if arc == "build":
         scored.sort(key=lambda x: x[1])

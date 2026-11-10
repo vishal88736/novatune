@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel
 
 
@@ -10,5 +12,5 @@ class AnalyticsOutput(BaseModel):
     total_listen_minutes: int = 0
     top_genres: dict[str, float] = {}
     mood_distribution: dict[str, float] = {}
-    timeline: list[dict] = []
-    radar: list[dict] = []
+    timeline: list[dict[str, Any]] = []
+    radar: list[dict[str, Any]] = []

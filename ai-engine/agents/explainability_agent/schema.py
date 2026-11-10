@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel
 
 
@@ -9,4 +11,4 @@ class ExplainabilityInput(BaseModel):
 class ExplainabilityOutput(BaseModel):
     track_title: str
     narrative: str
-    signals: list[dict]
+    signals: list[dict[str, Any]]

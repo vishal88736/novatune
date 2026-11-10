@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel
 
 
@@ -7,6 +9,6 @@ class DiscoveryInput(BaseModel):
 
 
 class DiscoveryOutput(BaseModel):
-    tracks: list[dict]
+    tracks: list[dict[str, Any]]
     arc_label: str = "discovery"
     generated_for_mood: str = "exploratory"

@@ -1,9 +1,11 @@
+from typing import Any
+
 from pydantic import BaseModel
 
 
 class RecommendationInput(BaseModel):
     user_id: str
-    feedback: dict | None = None
+    feedback: dict[str, Any] | None = None
 
 
 class TrackCandidate(BaseModel):

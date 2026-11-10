@@ -5,6 +5,7 @@ renders. Short-term turn context lives in the Redis context bus instead
 (see orchestrator/context_bus.py) — this agent is for what should persist.
 """
 
+from typing import Any
 import json
 
 from agents.base import AgentContext, AgentResult, BaseAgent
@@ -26,7 +27,7 @@ class MemoryAgent(BaseAgent):
             # Postgres store (via an internal read) and runs milestone
             # detection over the week's summary.
             timeline = ctx.shared_state.get("mood_history", [])
-            milestones: list[dict] = []
+            milestones: list[dict[str, Any]] = []
             if timeline:
                 raw = await self._llm.complete(
                     "You output only strict JSON.",

@@ -1,6 +1,8 @@
 """Thin wrapper around the Qdrant client — collection bootstrap, upsert, and
 search helpers shared by all pipelines."""
 
+from typing import Any
+
 from qdrant_client import QdrantClient
 from qdrant_client.http import models as qmodels
 
@@ -24,7 +26,7 @@ class VectorStore:
                     ),
                 )
 
-    def upsert(self, spec: CollectionSpec, point_id: str, vector: list[float], payload: dict) -> None:
+    def upsert(self, spec: CollectionSpec, point_id: str, vector: list[float], payload: dict[str, Any]) -> None:
         self._client.upsert(
             collection_name=spec.name,
             points=[qmodels.PointStruct(id=point_id, vector=vector, payload=payload)],
@@ -35,8 +37,8 @@ class VectorStore:
         spec: CollectionSpec,
         query_vector: list[float],
         limit: int = 20,
-        query_filter: dict | None = None,
-    ) -> list[dict]:
+        query_filter: dict[str, Any] | None = None,
+    ) -> list[dict[str, Any]]:
         qfilter = qmodels.Filter(**query_filter) if query_filter else None
         results = self._client.search(
             collection_name=spec.name, query_vector=query_vector, limit=limit, query_filter=qfilter

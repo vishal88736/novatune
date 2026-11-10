@@ -45,6 +45,13 @@ include = [
 ]
 exclude = ["tests*"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# The agents, providers and service modules are top-level packages that
+# live directly under ai-engine/, so that directory has to be importable.
+pythonpath = ["."]
+asyncio_default_fixture_loop_scope = "function"
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"

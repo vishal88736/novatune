@@ -4,6 +4,7 @@ labeled golden set. Run in CI on every prompt/model change (see
 infra/ci/ai-engine-ci.yml) to catch silent quality regressions.
 """
 
+from typing import Any
 import json
 from pathlib import Path
 
@@ -12,7 +13,7 @@ from providers.emotion.goemotions_provider import goemotions_provider
 GOLDEN_SET_PATH = Path(__file__).parent.parent / "golden_sets" / "mood_agent_cases.json"
 
 
-def run_eval() -> dict:
+def run_eval() -> dict[str, Any]:
     cases = json.loads(GOLDEN_SET_PATH.read_text())
     correct = 0
     for case in cases:

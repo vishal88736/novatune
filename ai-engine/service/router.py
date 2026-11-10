@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 
@@ -10,7 +12,7 @@ router = APIRouter()
 
 
 @router.post("/agents/{agent_name}/invoke")
-async def invoke_agent(agent_name: str, payload: dict) -> dict:
+async def invoke_agent(agent_name: str, payload: dict[str, Any]) -> dict[str, Any]:
     try:
         agent = get_agent(agent_name)
     except KeyError as exc:
@@ -25,7 +27,7 @@ async def invoke_agent(agent_name: str, payload: dict) -> dict:
 
 
 @router.post("/agents/conversation_agent/stream")
-async def stream_conversation(payload: dict) -> StreamingResponse:
+async def stream_conversation(payload: dict[str, Any]) -> StreamingResponse:
     """
     Dedicated streaming path for the Conversation Agent — the only agent
     whose output is token-streamed directly to the end user.
@@ -36,7 +38,7 @@ async def stream_conversation(payload: dict) -> StreamingResponse:
 
 
 @router.post("/pipeline/recommendation/run")
-async def run_recommendation_pipeline(payload: dict) -> dict:
+async def run_recommendation_pipeline(payload: dict[str, Any]) -> dict[str, Any]:
     agent = get_agent("recommendation_agent")
     ctx = await build_context(payload["user_id"], None, payload)
     result = await agent.run(ctx)
@@ -44,7 +46,7 @@ async def run_recommendation_pipeline(payload: dict) -> dict:
 
 
 @router.post("/pipeline/embedding/run")
-async def run_embedding_pipeline(payload: dict) -> dict:
+async def run_embedding_pipeline(payload: dict[str, Any]) -> dict[str, Any]:
     from pipelines.embedding_pipeline import embed_tracks_batch
 
     embed_tracks_batch(payload.get("tracks", []))

@@ -5,6 +5,8 @@ cluster. Clustering itself happens offline in the Celery task using the
 same LLM-based grouping prompt defined here.
 """
 
+from typing import Any
+
 from agents.base import AgentContext, AgentResult, BaseAgent
 
 
@@ -13,7 +15,7 @@ class TrendAnalysisAgent(BaseAgent):
 
     async def run(self, ctx: AgentContext) -> AgentResult:
         mood_filter = ctx.payload.get("mood_filter")
-        snapshots: dict[str, list[dict]] = ctx.shared_state.get("trend_snapshots", {})
+        snapshots: dict[str, list[dict[str, Any]]] = ctx.shared_state.get("trend_snapshots", {})
 
         tracks = snapshots.get(mood_filter, []) if mood_filter else [
             t for cluster_tracks in snapshots.values() for t in cluster_tracks

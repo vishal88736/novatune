@@ -7,19 +7,21 @@ them in raw rank order. Arc shapes:
   - "steady": default light shaping when no explicit arc is requested
 """
 
+from typing import Any
+
 from agents.base import AgentContext, AgentResult, BaseAgent
 
 
 class SequencingAgent(BaseAgent):
     name = "sequencing_agent"
 
-    def _energy_proxy(self, track: dict) -> float:
+    def _energy_proxy(self, track: dict[str, Any]) -> float:
         # Placeholder: production reads a stored energy/tempo feature per
         # track (derived at ingestion time) rather than duration.
         return (track.get("duration_seconds", 200) % 60) / 60
 
     async def run(self, ctx: AgentContext) -> AgentResult:
-        tracks: list[dict] = ctx.shared_state.get("candidate_tracks", [])
+        tracks: list[dict[str, Any]] = ctx.shared_state.get("candidate_tracks", [])
         target_arc = ctx.payload.get("target_arc", "steady")
 
         scored = [(t, self._energy_proxy(t)) for t in tracks]

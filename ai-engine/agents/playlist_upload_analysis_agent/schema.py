@@ -1,10 +1,12 @@
+from typing import Any
+
 from pydantic import BaseModel
 
 
 class PlaylistAnalysisInput(BaseModel):
     user_id: str
     playlist_id: str
-    tracks: list[dict]  # [{title, artist}, ...] resolved from the upload
+    tracks: list[dict[str, Any]]  # [{title, artist}, ...] resolved from the upload
 
 
 class PlaylistAnalysisOutput(BaseModel):

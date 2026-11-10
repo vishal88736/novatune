@@ -5,6 +5,7 @@ user's taste profile — then hands off to the Taste Profiling Agent to
 persist the delta and to the embedding pipeline to index each track.
 """
 
+from typing import Any
 import json
 
 from agents.base import AgentContext, AgentResult, BaseAgent
@@ -19,7 +20,7 @@ class PlaylistUploadAnalysisAgent(BaseAgent):
         self._llm = get_llm_provider()
 
     async def run(self, ctx: AgentContext) -> AgentResult:
-        tracks: list[dict] = ctx.payload.get("tracks", [])
+        tracks: list[dict[str, Any]] = ctx.payload.get("tracks", [])
         track_list = "\n".join(f"{t.get('title')} — {t.get('artist')}" for t in tracks[:100])
 
         raw = await self._llm.complete(
