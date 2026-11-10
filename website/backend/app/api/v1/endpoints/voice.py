@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, File, UploadFile
 
 from app.api.v1.deps import CurrentUserDep
@@ -7,7 +9,7 @@ router = APIRouter()
 
 
 @router.post("/transcribe")
-async def transcribe(current_user: CurrentUserDep, file: UploadFile = File(...)) -> dict:
+async def transcribe(current_user: CurrentUserDep, file: UploadFile = File(...)) -> dict[str, Any]:
     """
     Forwards recorded audio to ai-engine, which transcribes via Groq Whisper
     (whisper-large-v3-turbo) and routes the transcript into the Conversation

@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from typing import Any
 
 from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.dialects.postgresql import JSONB, UUID
@@ -14,7 +15,7 @@ class TasteProfile(Base):
     user_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.id"), primary_key=True
     )
-    genre_affinity: Mapped[dict] = mapped_column(JSONB, default=dict)
-    artist_affinity: Mapped[dict] = mapped_column(JSONB, default=dict)
+    genre_affinity: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
+    artist_affinity: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     embedding_ref: Mapped[str | None] = mapped_column(nullable=True)
     last_computed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)

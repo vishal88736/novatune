@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter
 
 from app.api.v1.deps import CurrentUserDep
@@ -7,7 +9,7 @@ router = APIRouter()
 
 
 @router.get("/{track_id}")
-async def explain_track(track_id: str, current_user: CurrentUserDep) -> dict:
+async def explain_track(track_id: str, current_user: CurrentUserDep) -> dict[str, Any]:
     return await ai_engine_client.invoke_agent(
         "explainability_agent", {"user_id": current_user.id, "track_id": track_id}
     )

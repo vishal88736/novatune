@@ -1,3 +1,5 @@
+from typing import Any, cast
+
 from fastapi import APIRouter
 
 from app.api.v1.deps import CurrentUserDep
@@ -14,16 +16,16 @@ async def overview(current_user: CurrentUserDep) -> AnalyticsOverview:
 
 
 @router.get("/mood-timeline")
-async def mood_timeline(current_user: CurrentUserDep) -> list[dict]:
+async def mood_timeline(current_user: CurrentUserDep) -> list[dict[str, Any]]:
     result = await ai_engine_client.invoke_agent(
         "analytics_agent", {"user_id": current_user.id, "query": "mood_timeline"}
     )
-    return result.get("timeline", [])
+    return cast(list[dict[str, Any]], result.get("timeline", []))
 
 
 @router.get("/genre-radar")
-async def genre_radar(current_user: CurrentUserDep) -> list[dict]:
+async def genre_radar(current_user: CurrentUserDep) -> list[dict[str, Any]]:
     result = await ai_engine_client.invoke_agent(
         "analytics_agent", {"user_id": current_user.id, "query": "genre_radar"}
     )
-    return result.get("radar", [])
+    return cast(list[dict[str, Any]], result.get("radar", []))

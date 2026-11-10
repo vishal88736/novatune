@@ -20,19 +20,21 @@ async def upload_playlist(
     source: str = Form(default="upload_csv"),
 ) -> Playlist:
     raw = await file.read()
-    playlist = await playlist_ingestion_service.ingest_csv(db, current_user.id, raw)
+    playlist = await playlist_ingestion_service.ingest_csv(db, current_user.uuid_id, raw)
     return playlist
 
 
 @router.get("", response_model=list[PlaylistStatusOut])
 async def list_playlists(current_user: CurrentUserDep, db: DbDep) -> list[Playlist]:
-    result = await db.execute(select(Playlist).where(Playlist.user_id == current_user.id))
+    result = await db.execute(select(Playlist).where(Playlist.user_id == current_user.uuid_id))
     return list(result.scalars().all())
 
 
 @router.get("/{playlist_id}", response_model=PlaylistStatusOut)
 async def get_playlist(playlist_id: UUID, current_user: CurrentUserDep, db: DbDep) -> Playlist:
-    result = await db.execute(select(Playlist).where(Playlist.id == playlist_id))
+    result = await db.execute(
+        select(Playlist).where(Playlist.id == playlist_id, Playlist.user_id == current_user.uuid_id)
+    )
     playlist = result.scalar_one_or_none()
     if not playlist:
         raise NotFoundError("Playlist not found.")
@@ -41,7 +43,9 @@ async def get_playlist(playlist_id: UUID, current_user: CurrentUserDep, db: DbDe
 
 @router.delete("/{playlist_id}", status_code=204)
 async def delete_playlist(playlist_id: UUID, current_user: CurrentUserDep, db: DbDep) -> None:
-    result = await db.execute(select(Playlist).where(Playlist.id == playlist_id))
+    result = await db.execute(
+        select(Playlist).where(Playlist.id == playlist_id, Playlist.user_id == current_user.uuid_id)
+    )
     playlist = result.scalar_one_or_none()
     if not playlist:
         raise NotFoundError("Playlist not found.")

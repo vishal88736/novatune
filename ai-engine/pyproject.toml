@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "vibeai-ai-engine"
 version = "0.1.0"
@@ -26,6 +30,20 @@ dev = [
   "ruff==0.8.4",
   "mypy==1.14.0",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "agents*",
+  "evaluation*",
+  "orchestrator*",
+  "pipelines*",
+  "prompts*",
+  "providers*",
+  "service*",
+  "vector_store*",
+]
+exclude = ["tests*"]
 
 [tool.ruff]
 line-length = 100

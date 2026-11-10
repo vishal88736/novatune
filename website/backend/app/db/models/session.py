@@ -1,6 +1,7 @@
 import enum
 import uuid
 from datetime import datetime
+from typing import Any
 
 from sqlalchemy import DateTime, Enum, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import JSONB, UUID
@@ -18,7 +19,7 @@ class ListeningSession(Base, UUIDPrimaryKeyMixin):
     ended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     target_mood: Mapped[str | None] = mapped_column(String(50), nullable=True)
     resulting_mood: Mapped[str | None] = mapped_column(String(50), nullable=True)
-    queue: Mapped[list] = mapped_column(JSONB, default=list)  # ordered track_id list
+    queue: Mapped[list[Any]] = mapped_column(JSONB, default=list)  # ordered track_id list
 
 
 class EventType(str, enum.Enum):

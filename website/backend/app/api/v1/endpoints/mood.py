@@ -1,3 +1,5 @@
+from typing import Any, cast
+
 from fastapi import APIRouter
 
 from app.api.v1.deps import CurrentUserDep
@@ -28,6 +30,6 @@ async def current_mood(current_user: CurrentUserDep) -> MoodCheckinResponse:
 
 
 @router.get("/history")
-async def mood_history(current_user: CurrentUserDep) -> list[dict]:
+async def mood_history(current_user: CurrentUserDep) -> list[dict[str, Any]]:
     result = await ai_engine_client.invoke_agent("memory_agent", {"user_id": current_user.id, "query": "mood_history"})
-    return result.get("history", [])
+    return cast(list[dict[str, Any]], result.get("history", []))

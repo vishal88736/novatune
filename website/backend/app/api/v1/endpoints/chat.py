@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 
@@ -22,6 +24,6 @@ async def send_message(payload: ChatMessageRequest, current_user: CurrentUserDep
 
 
 @router.get("/history")
-async def get_history(current_user: CurrentUserDep, session_id: str) -> dict:
+async def get_history(current_user: CurrentUserDep, session_id: str) -> dict[str, Any]:
     # Chat history persistence delegated to the Memory Agent's session log.
     return {"session_id": session_id, "messages": []}

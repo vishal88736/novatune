@@ -1,9 +1,10 @@
 """YouTube Data API wrapper with Redis-cached search results and quota tracking."""
 
 import json
+from typing import Any, cast
 
 import httpx
-import redis.asyncio as redis
+from redis.asyncio import Redis
 
 from app.core.config import settings
 
@@ -13,13 +14,13 @@ CACHE_TTL_SECONDS = 6 * 60 * 60
 
 class YouTubeService:
     def __init__(self) -> None:
-        self._redis = redis.from_url(settings.redis_url, decode_responses=True)
+        self._redis = Redis.from_url(settings.redis_url, decode_responses=True)
 
-    async def search(self, query: str, max_results: int = 10) -> list[dict]:
+    async def search(self, query: str, max_results: int = 10) -> list[dict[str, Any]]:
         cache_key = f"cache:youtube:search:{query}:{max_results}"
         cached = await self._redis.get(cache_key)
         if cached:
-            return json.loads(cached)
+            return cast(list[dict[str, Any]], json.loads(cached))
 
         async with httpx.AsyncClient() as client:
             resp = await client.get(
@@ -35,7 +36,7 @@ class YouTubeService:
                 timeout=10.0,
             )
             resp.raise_for_status()
-            items = resp.json().get("items", [])
+            items = cast(list[dict[str, Any]], resp.json().get("items", []))
 
         results = [
             {

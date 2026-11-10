@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "vibeai-backend"
 version = "0.1.0"
@@ -29,6 +33,15 @@ dev = [
   "httpx==0.28.1",
 ]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+exclude = ["alembic*", "tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["app/tests"]
+asyncio_default_fixture_loop_scope = "function"
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"
@@ -37,3 +50,9 @@ target-version = "py312"
 python_version = "3.12"
 strict = true
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# Celery's @celery_app.task decorator ships no type information, so mypy
+# cannot see the wrapped function's signature. Task bodies stay fully typed.
+module = ["app.workers.*"]
+disable_error_code = ["misc"]

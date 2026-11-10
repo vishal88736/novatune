@@ -8,6 +8,7 @@ swapped independently of the product API.
 """
 
 from collections.abc import AsyncGenerator
+from typing import Any, cast
 
 import httpx
 
@@ -19,12 +20,12 @@ class AIEngineClient:
     def __init__(self, base_url: str | None = None):
         self.base_url = base_url or settings.ai_engine_base_url
 
-    async def invoke_agent(self, agent_name: str, payload: dict) -> dict:
+    async def invoke_agent(self, agent_name: str, payload: dict[str, Any]) -> dict[str, Any]:
         async with httpx.AsyncClient(timeout=30.0) as client:
             try:
                 resp = await client.post(f"{self.base_url}/agents/{agent_name}/invoke", json=payload)
                 resp.raise_for_status()
-                return resp.json()
+                return cast(dict[str, Any], resp.json())
             except httpx.HTTPError as exc:
                 raise AIEngineUnavailableError() from exc
 
@@ -40,7 +41,9 @@ class AIEngineClient:
                 async for chunk in resp.aiter_bytes():
                     yield chunk
 
-    async def run_recommendation_pipeline(self, user_id: str, mood_vector: dict) -> dict:
+    async def run_recommendation_pipeline(
+        self, user_id: str, mood_vector: dict[str, Any]
+    ) -> dict[str, Any]:
         async with httpx.AsyncClient(timeout=30.0) as client:
             try:
                 resp = await client.post(
@@ -48,7 +51,7 @@ class AIEngineClient:
                     json={"user_id": user_id, "mood_vector": mood_vector},
                 )
                 resp.raise_for_status()
-                return resp.json()
+                return cast(dict[str, Any], resp.json())
             except httpx.HTTPError as exc:
                 raise AIEngineUnavailableError() from exc
 

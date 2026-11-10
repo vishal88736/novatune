@@ -1,3 +1,5 @@
+import uuid
+
 import httpx
 from fastapi import Cookie, Depends
 
@@ -6,10 +8,24 @@ from app.core.exceptions import UnauthorizedError
 
 
 class CurrentUser:
+    """
+    The authenticated caller.
+
+    `id` is the raw Better Auth user id and is JSON-safe — it is what gets
+    forwarded to ai-engine as an opaque `user_id`. `uuid_id` is the same value
+    parsed into a UUID, which is what the domain tables key on (see
+    `db/models/user.py`). Better Auth is configured to generate UUID ids so
+    the two always agree.
+    """
+
     def __init__(self, id: str, email: str, name: str | None = None):
         self.id = id
         self.email = email
         self.name = name
+
+    @property
+    def uuid_id(self) -> uuid.UUID:
+        return uuid.UUID(self.id)
 
 
 async def get_current_user(

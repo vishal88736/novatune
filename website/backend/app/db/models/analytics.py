@@ -1,5 +1,6 @@
 import uuid
 from datetime import date
+from typing import Any
 
 from sqlalchemy import Date, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import JSONB, UUID
@@ -16,5 +17,5 @@ class AnalyticsDailyRollup(Base):
     )
     date: Mapped[date] = mapped_column(Date, primary_key=True)
     total_listen_minutes: Mapped[int] = mapped_column(Integer, default=0)
-    top_genres: Mapped[dict] = mapped_column(JSONB, default=dict)
-    mood_distribution: Mapped[dict] = mapped_column(JSONB, default=dict)
+    top_genres: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
+    mood_distribution: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)

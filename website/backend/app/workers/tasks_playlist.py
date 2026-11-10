@@ -1,8 +1,10 @@
+from typing import Any
+
 from app.workers.celery_app import celery_app
 
 
 @celery_app.task(name="app.workers.tasks_playlist.analyze_playlist")
-def analyze_playlist(playlist_id: str) -> dict:
+def analyze_playlist(playlist_id: str) -> dict[str, Any]:
     """
     Parses an uploaded playlist's tracks, resolves them against YouTube,
     triggers ai-engine's embedding pipeline per track, and marks the

@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -10,7 +11,7 @@ class JourneyMilestone(BaseModel):
 
 
 class JourneyResponse(BaseModel):
-    timeline: list[dict]
+    timeline: list[dict[str, Any]]
     milestones: list[JourneyMilestone]
 
 

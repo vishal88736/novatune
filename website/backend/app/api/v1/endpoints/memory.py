@@ -1,3 +1,5 @@
+from typing import Any, cast
+
 from fastapi import APIRouter
 
 from app.api.v1.deps import CurrentUserDep
@@ -14,6 +16,6 @@ async def journey(current_user: CurrentUserDep) -> JourneyResponse:
 
 
 @router.get("/entries", response_model=list[MemoryEntryOut])
-async def entries(current_user: CurrentUserDep) -> list[dict]:
+async def entries(current_user: CurrentUserDep) -> list[dict[str, Any]]:
     result = await ai_engine_client.invoke_agent("memory_agent", {"user_id": current_user.id, "query": "entries"})
-    return result.get("entries", [])
+    return cast(list[dict[str, Any]], result.get("entries", []))

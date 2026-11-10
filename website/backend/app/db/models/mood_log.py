@@ -1,7 +1,8 @@
 import enum
 import uuid
+from typing import Any
 
-from sqlalchemy import Enum, Float, ForeignKey, String, Text
+from sqlalchemy import Enum, Float, ForeignKey, Text
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -20,7 +21,7 @@ class MoodLog(Base, UUIDPrimaryKeyMixin, TimestampMixin):
 
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), index=True)
     source: Mapped[MoodSource] = mapped_column(Enum(MoodSource))
-    emotion_vector: Mapped[dict] = mapped_column(JSONB)  # 27-dim GoEmotions scores
+    emotion_vector: Mapped[dict[str, Any]] = mapped_column(JSONB)  # 27-dim GoEmotions scores
     valence: Mapped[float] = mapped_column(Float)
     arousal: Mapped[float] = mapped_column(Float)
     raw_text: Mapped[str | None] = mapped_column(Text, nullable=True)
