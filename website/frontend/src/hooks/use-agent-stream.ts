@@ -55,10 +55,23 @@ export function useAgentStream() {
             const event = JSON.parse(payload) as
               | { type: "token"; content: string }
               | { type: "agent"; name: string }
+              | { type: "error"; message: string }
               | { type: "done" };
 
             if (event.type === "agent") setThinking(true, event.name);
             if (event.type === "token") updateStreamingMessage(assistantId, event.content);
+            if (event.type === "error") {
+              // The agent failed mid-stream. Say so in the thread instead of
+              // leaving an empty bubble behind.
+              finalizeMessage(assistantId);
+              appendMessage({
+                id: crypto.randomUUID(),
+                role: "assistant",
+                content: `Something went wrong talking to VibeAI: ${event.message}`,
+                createdAt: new Date().toISOString(),
+              });
+              setThinking(false);
+            }
             if (event.type === "done") {
               finalizeMessage(assistantId);
               setThinking(false);

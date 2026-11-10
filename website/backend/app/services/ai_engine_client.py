@@ -32,14 +32,24 @@ class AIEngineClient:
     async def stream_conversation(
         self, session_id: str, user_id: str, message: str
     ) -> AsyncGenerator[bytes, None]:
+        """
+        Proxies the Conversation Agent's SSE stream.
+
+        If ai-engine is unreachable the failure is turned into an SSE `error`
+        event so the browser sees a closed, explained stream rather than a
+        connection that hangs.
+        """
         async with httpx.AsyncClient(timeout=None) as client:
-            async with client.stream(
-                "POST",
-                f"{self.base_url}/agents/conversation_agent/stream",
-                json={"session_id": session_id, "user_id": user_id, "message": message},
-            ) as resp:
-                async for chunk in resp.aiter_bytes():
-                    yield chunk
+            try:
+                async with client.stream(
+                    "POST",
+                    f"{self.base_url}/agents/conversation_agent/stream",
+                    json={"session_id": session_id, "user_id": user_id, "message": message},
+                ) as resp:
+                    async for chunk in resp.aiter_bytes():
+                        yield chunk
+            except httpx.HTTPError as exc:
+                raise AIEngineUnavailableError() from exc
 
     async def run_recommendation_pipeline(
         self, user_id: str, mood_vector: dict[str, Any]
