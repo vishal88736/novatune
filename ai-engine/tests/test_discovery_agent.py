@@ -5,7 +5,7 @@ from agents.discovery_agent.agent import DiscoveryAgent
 
 
 @pytest.mark.asyncio
-async def test_discovery_filters_high_popularity_tracks():
+async def test_discovery_filters_high_popularity_tracks() -> None:
     agent = DiscoveryAgent()
     tracks = [
         {"id": "mainstream", "popularity_score": 0.9},

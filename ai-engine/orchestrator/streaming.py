@@ -5,9 +5,10 @@ Formats agent output as Server-Sent Events consumed by website/backend's
 
 import json
 from collections.abc import AsyncGenerator
+from typing import Any
 
 
-def sse_event(event_type: str, **fields) -> bytes:
+def sse_event(event_type: str, **fields: Any) -> bytes:
     payload = json.dumps({"type": event_type, **fields})
     return f"data: {payload}\n\n".encode()
 

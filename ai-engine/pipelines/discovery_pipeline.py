@@ -1,5 +1,7 @@
 """Filters a candidate pool down to underexposed tracks matching taste."""
 
+from typing import Any
+
 POPULARITY_CEILING = 0.35
 
 

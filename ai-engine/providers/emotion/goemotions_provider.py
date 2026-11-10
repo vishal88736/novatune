@@ -7,6 +7,7 @@ agents (like Explainability) that want the nuance.
 """
 
 from functools import lru_cache
+from typing import Any
 
 from transformers import pipeline
 
@@ -30,7 +31,7 @@ VALENCE_AROUSAL_MAP: dict[str, tuple[float, float]] = {
 
 
 @lru_cache(maxsize=1)
-def _classifier():
+def _classifier() -> Any:
     return pipeline(
         "text-classification",
         model=settings.goemotions_model_name,

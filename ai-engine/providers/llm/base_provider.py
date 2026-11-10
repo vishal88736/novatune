@@ -4,7 +4,6 @@ config without touching agent logic."""
 
 from abc import ABC, abstractmethod
 from collections.abc import AsyncGenerator
-from typing import Any
 
 
 class LLMProvider(ABC):
@@ -31,6 +30,10 @@ class LLMProvider(ABC):
         temperature: float = 0.7,
     ) -> AsyncGenerator[str, None]:
         """Token-by-token streaming completion, used by the Conversation Agent."""
+        # Declared as an async generator so subclasses that `yield` match
+        # this signature; the body is never executed.
+        if False:  # pragma: no cover
+            yield ""
 
     @abstractmethod
     async def transcribe(self, audio_bytes: bytes, filename: str = "audio.wav") -> str:

@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const compat = new FlatCompat({ baseDirectory: __dirname });
 
-export default [
+const config = [
   {
     ignores: [".next/**", "node_modules/**", "out/**", "next-env.d.ts"],
   },
@@ -18,6 +18,13 @@ export default [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      // The product copy is conversational and leans on contractions
+      // ("Today's Vibe", "how you're feeling"). Apostrophes and quotes in
+      // JSX text render correctly, so escaping them as entities would only
+      // make the copy harder to read and edit.
+      "react/no-unescaped-entities": "off",
     },
   },
 ];
+
+export default config;

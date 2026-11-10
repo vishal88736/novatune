@@ -18,7 +18,8 @@ class SequencingAgent(BaseAgent):
     def _energy_proxy(self, track: dict[str, Any]) -> float:
         # Placeholder: production reads a stored energy/tempo feature per
         # track (derived at ingestion time) rather than duration.
-        return (track.get("duration_seconds", 200) % 60) / 60
+        duration = track.get("duration_seconds", 200)
+        return float(duration % 60) / 60
 
     async def run(self, ctx: AgentContext) -> AgentResult:
         tracks: list[dict[str, Any]] = ctx.shared_state.get("candidate_tracks", [])

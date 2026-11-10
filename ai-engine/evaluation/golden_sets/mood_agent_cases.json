@@ -1,7 +1,14 @@
 [
-  { "text": "I just got the job offer I've been waiting months for!", "expected_label": "joy" },
-  { "text": "I can't stop thinking about how much I miss them.", "expected_label": "sadness" },
-  { "text": "Why would they even say that to me, that's so unfair.", "expected_label": "anger" },
-  { "text": "I'm a little nervous about the interview tomorrow.", "expected_label": "nervousness" },
+  { "text": "I just got the job offer I've been waiting months for!", "expected_label": "excitement", "acceptable_labels": ["joy", "admiration"] },
+  { "text": "This makes me so happy I could cry.", "expected_label": "joy" },
+  { "text": "I can't stop thinking about how much I miss them.", "expected_label": "sadness", "acceptable_labels": ["disappointment"] },
+  { "text": "Everything feels heavy and grey today.", "expected_label": "sadness", "acceptable_labels": ["disappointment", "grief"] },
+  { "text": "I feel completely drained and empty.", "expected_label": "sadness", "acceptable_labels": ["disappointment"] },
+  { "text": "I'm furious with them for lying to my face.", "expected_label": "anger" },
+  { "text": "Why would they even say that to me, that's so unfair.", "expected_label": "annoyance", "acceptable_labels": ["anger", "disapproval"] },
+  { "text": "I'm a little nervous about the interview tomorrow.", "expected_label": "nervousness", "acceptable_labels": ["fear"] },
+  { "text": "I'm terrified of what might happen.", "expected_label": "fear", "acceptable_labels": ["nervousness"] },
+  { "text": "She made me feel so loved and grateful.", "expected_label": "love", "acceptable_labels": ["gratitude"] },
+  { "text": "The concert was absolutely incredible.", "expected_label": "admiration", "acceptable_labels": ["excitement", "joy"] },
   { "text": "Just a normal, quiet evening at home.", "expected_label": "neutral" }
 ]

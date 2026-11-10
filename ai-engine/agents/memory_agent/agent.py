@@ -28,6 +28,8 @@ class MemoryAgent(BaseAgent):
             # detection over the week's summary.
             timeline = ctx.shared_state.get("mood_history", [])
             milestones: list[dict[str, Any]] = []
+            summary = ""
+
             if timeline:
                 raw = await self._llm.complete(
                     "You output only strict JSON.",
@@ -43,9 +45,17 @@ class MemoryAgent(BaseAgent):
                 except json.JSONDecodeError:
                     pass
 
+                summary = await self._llm.complete(
+                    "You are a thoughtful, warm friend reflecting on someone's emotional journey. Write one concise paragraph.",
+                    JOURNEY_SUMMARY_PROMPT.format(entries=json.dumps(timeline[-14:])),
+                    model_tier="reasoning",
+                    temperature=0.5,
+                    max_tokens=300,
+                )
+
             return AgentResult(
                 agent_name=self.name,
-                data={"timeline": timeline, "milestones": milestones},
+                data={"timeline": timeline, "milestones": milestones, "summary": summary},
                 trace={"milestone_count": len(milestones)},
             )
 

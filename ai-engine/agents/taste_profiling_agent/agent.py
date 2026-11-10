@@ -6,6 +6,8 @@ computed from listening_events. Heavy recompute happens nightly via Celery
 performs light incremental nudges on strong real-time signals.
 """
 
+from typing import Any
+
 from agents.base import AgentContext, AgentResult, BaseAgent
 from vector_store.collections import USER_TASTE
 from vector_store.qdrant_client import vector_store
@@ -20,7 +22,7 @@ class TasteProfilingAgent(BaseAgent):
         # In production: read cached genre/artist affinity from Postgres
         # (website/backend owns this table) and the taste embedding from
         # Qdrant's user_taste_embeddings collection.
-        results = vector_store.search(
+        results: list[dict[str, Any]] = vector_store.search(
             USER_TASTE, query_vector=[0.0] * 384, limit=1, query_filter={"must": [{"key": "user_id", "match": {"value": user_id}}]}
         ) if False else []  # placeholder guard until embeddings are seeded
 

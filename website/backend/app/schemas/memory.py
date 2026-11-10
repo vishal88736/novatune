@@ -13,6 +13,7 @@ class JourneyMilestone(BaseModel):
 class JourneyResponse(BaseModel):
     timeline: list[dict[str, Any]]
     milestones: list[JourneyMilestone]
+    summary: str = ""
 
 
 class MemoryEntryOut(BaseModel):

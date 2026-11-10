@@ -5,7 +5,7 @@ from agents.sequencing_agent.agent import SequencingAgent
 
 
 @pytest.mark.asyncio
-async def test_build_arc_orders_ascending_by_energy_proxy():
+async def test_build_arc_orders_ascending_by_energy_proxy() -> None:
     agent = SequencingAgent()
     tracks = [
         {"id": "a", "duration_seconds": 130},

@@ -6,6 +6,7 @@ out to whichever specialist agents the turn actually needs.
 
 import json
 from collections.abc import AsyncGenerator
+from typing import Any, cast
 
 from agents.base import AgentContext, AgentResult, BaseAgent
 from agents.conversation_agent.prompts import INTENT_CLASSIFICATION_PROMPT, SYSTEM_PROMPT
@@ -30,7 +31,7 @@ class ConversationAgent(BaseAgent):
             max_tokens=50,
         )
         try:
-            return json.loads(raw).get("intent", "chit_chat")
+            return cast(str, cast(dict[str, Any], json.loads(raw)).get("intent", "chit_chat"))
         except json.JSONDecodeError:
             return "chit_chat"
 

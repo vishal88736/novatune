@@ -5,7 +5,7 @@ from agents.mood_agent.agent import MoodAgent
 
 
 @pytest.mark.asyncio
-async def test_mood_agent_defaults_to_neutral_with_no_input():
+async def test_mood_agent_defaults_to_neutral_with_no_input() -> None:
     agent = MoodAgent()
     ctx = AgentContext(user_id="test-user", payload={})
     result = await agent.run(ctx)

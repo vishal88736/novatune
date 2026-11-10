@@ -25,14 +25,12 @@ export const auth = betterAuth({
     cookieCache: { enabled: true, maxAge: 5 * 60 },
   },
   advanced: {
-    database: {
-      /**
-       * The domain tables key on UUIDs (see website/backend/app/db/models/user.py),
-       * and website/backend parses the session's user id straight into a UUID.
-       * Better Auth's default id generator returns an opaque string, so it is
-       * overridden here to keep both sides in agreement.
-       */
-      generateId: () => crypto.randomUUID(),
-    },
+    /**
+     * The domain tables key on UUIDs (see website/backend/app/db/models/user.py),
+     * and website/backend parses the session's user id straight into a UUID.
+     * Better Auth's default id generator returns an opaque string, so it is
+     * overridden here to keep both sides in agreement.
+     */
+    generateId: () => crypto.randomUUID(),
   },
 });

@@ -5,6 +5,8 @@ rollups for each dashboard view and can optionally add a one-line LLM
 narrative summary.
 """
 
+from typing import Any
+
 from agents.base import AgentContext, AgentResult, BaseAgent
 
 
@@ -13,7 +15,7 @@ class AnalyticsAgent(BaseAgent):
 
     async def run(self, ctx: AgentContext) -> AgentResult:
         query = ctx.payload.get("query", "overview")
-        rollups: dict = ctx.shared_state.get("rollups", {})
+        rollups: dict[str, Any] = ctx.shared_state.get("rollups", {})
 
         if query == "mood_timeline":
             return AgentResult(agent_name=self.name, data={"timeline": rollups.get("timeline", [])}, trace={})

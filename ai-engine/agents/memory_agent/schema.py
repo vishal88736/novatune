@@ -13,3 +13,4 @@ class MemoryOutput(BaseModel):
     entries: list[dict[str, Any]] = []
     timeline: list[dict[str, Any]] = []
     milestones: list[dict[str, Any]] = []
+    summary: str = ""
